@@ -2,7 +2,7 @@ import csv
 import math
 from typing import List, Tuple
 
-def index_range(self, page:int, page_size:int) -> Tuple[int, int]:
+def index_range(page:int, page_size:int) -> Tuple[int, int]:
     """Get indexes of pagination"""
     start_index = (page - 1) * page_size
     end_index = start_index + page_size

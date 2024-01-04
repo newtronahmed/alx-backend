@@ -29,6 +29,7 @@ class BaseCaching():
         """
         raise NotImplementedError("get must be implemented in your cache class")
 
+
 class BasicCache(BaseCaching):
     """ Basic Cache """
 
@@ -39,7 +40,4 @@ class BasicCache(BaseCaching):
     
     def get(self, key):
         """ Get the item linked to key"""
-        if key is not None:
-            return self.cache_data.get(key)
-        else:
-            return key
+        return self.cache_data.get(key, None)

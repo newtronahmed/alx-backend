@@ -16,7 +16,7 @@ class MRUCache(BaseCaching):
         """Add item to cache"""
         if key is None and item is None:
             return
-        if key in self.cacehd_data:
+        if key in self.cache_data:
             self.cached_data[key] = item
         else:
             if len(self.cached_data) + 1 > BaseCaching.MAX_ITEMS:
@@ -27,6 +27,6 @@ class MRUCache(BaseCaching):
 
     def get(self, key):
         """Get item """
-        if key is not None and key in self.cached_data:
+        if key is not None and key in self.cache_data:
             self.cached_data.move_to_end(key, last=False)
         return self.cached_data.get(key, None)

@@ -10,7 +10,7 @@ class BasicCache(BaseCaching):
         """ Assign to dictionary chache"""
         if key is not None and item is not None:
             self.cache_data[key] = item
-    
+
     def get(self, key):
         """ Get the item linked to key"""
         return self.cache_data.get(key, None)

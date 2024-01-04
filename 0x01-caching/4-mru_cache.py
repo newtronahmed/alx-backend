@@ -1,32 +1,40 @@
 #!/usr/bin/env python3
-""" Task 4 module"""
+"""Most Recently Used caching module.
+"""
 from collections import OrderedDict
+
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """Implementation of MRUCache"""
+    """Represents an object that allows storing and
+    retrieving items from a dictionary with an MRU
+    removal mechanism when the limit is reached.
+    """
 
     def __init__(self):
-        """Iniitialize cache"""
+        """Initializes the cache.
+        """
         super().__init__()
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """Add item to cache"""
-        if key is None and item is None:
+        """Adds an item in the cache.
+        """
+        if key is None or item is None:
             return
-        if key in self.cache_data:
-            self.cache_data[key] = item
-        else:
+        if key not in self.cache_data:
             if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
-                first_key, _ = self.cache_data.popitem(False)
-                print("DISCARD:", first_key)
-        self.cache_data[key] = item
-        self.cache_data.move_to_end(key, last=True)
+                mru_key, _ = self.cache_data.popitem(False)
+                print("DISCARD:", mru_key)
+            self.cache_data[key] = item
+            self.cache_data.move_to_end(key, last=False)
+        else:
+            self.cache_data[key] = item
 
     def get(self, key):
-        """Get item """
+        """Retrieves an item by key.
+        """
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
         return self.cache_data.get(key, None)

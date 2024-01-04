@@ -15,10 +15,10 @@ class FIFOCache(BaseCaching):
         """Add item to cache"""
         if key is None and item is None:
             return
+        self.cache_data[key] = item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first_value = self.cache_data.popitem(false)
-            self.cache_data[key] = item
-            print("DISCARD: {}".(first_value))
+            first_key, _ = self.cache_data.popitem(False)
+            print(f"DISCARD: {first_key}")
 
     def get(self, key):
         """ Get item linked to cache key"""
